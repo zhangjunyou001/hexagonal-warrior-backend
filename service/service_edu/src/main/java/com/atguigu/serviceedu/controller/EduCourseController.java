@@ -5,7 +5,6 @@ import com.atguigu.commonutils.R;
 import com.atguigu.serviceedu.entity.EduCourse;
 import com.atguigu.serviceedu.entity.vo.CourseInfoVo;
 import com.atguigu.serviceedu.entity.vo.CoursePublishVo;
-import com.atguigu.serviceedu.service.EduChapterService;
 import com.atguigu.serviceedu.service.EduCourseService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @Api(description="课程管理")
 @RestController
-@RequestMapping("/eduService/course")
+@RequestMapping("/eduservice/course")
 public class EduCourseController {
 
     @Autowired

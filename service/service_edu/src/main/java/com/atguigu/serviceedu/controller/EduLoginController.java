@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(description="登录管理")
 @RestController
-@RequestMapping("/eduService/user")
+@RequestMapping("/eduservice/user")
 //@CrossOrigin //跨域
 public class EduLoginController {
 

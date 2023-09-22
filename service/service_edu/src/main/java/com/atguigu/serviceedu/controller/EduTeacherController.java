@@ -8,20 +8,19 @@ import com.atguigu.serviceedu.entity.vo.TeacherQuery;
 import com.atguigu.serviceedu.service.EduTeacherService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 @Api(description="讲师管理") //swagger提示
 //@CrossOrigin //跨域
 @RestController
-@RequestMapping("/eduService/teacher")
+@RequestMapping("/eduservice/teacher")
 public class EduTeacherController {
 
     @Autowired

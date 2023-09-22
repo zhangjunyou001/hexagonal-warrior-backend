@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(description="小节管理")
 @RestController
-@RequestMapping("/eduService/video")
+@RequestMapping("/eduservice/video")
 //@CrossOrigin
 public class EduVideoController {
 
