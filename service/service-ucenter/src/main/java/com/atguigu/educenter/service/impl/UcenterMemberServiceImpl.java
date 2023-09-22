@@ -25,20 +25,20 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         String mobile = ucenterMember.getMobile();
         String password = ucenterMember.getPassword();
         if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)) {
-            throw new GuliException(20001,"登录失败");
+            throw new GuliException(20001,"Login Failed");
         }
         QueryWrapper<UcenterMember> wrapper=new QueryWrapper<>();
         wrapper.eq("mobile",mobile);
         UcenterMember mobileMember = baseMapper.selectOne(wrapper);
         if (mobileMember==null){
-            throw new GuliException(20001,"用户不存在");
+            throw new GuliException(20001,"User not exist");
         }
         String md5password = MD5.encrypt(password);
         if (!md5password.equals(mobileMember.getPassword())){
-            throw new GuliException(20001,"账户名或密码错误");
+            throw new GuliException(20001,"Username or password is wrong");
         }
         if (mobileMember.getIsDisabled()){
-            throw new GuliException(20001,"该用户已禁用,请联系管理员");
+            throw new GuliException(20001,"User is disabled, please contract admin");
         }
         String jwtToken = JwtUtils.getJwtToken(mobileMember.getId(), mobileMember.getNickname());
 
@@ -47,7 +47,6 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
 
     @Override
     public void register(RegisterVo registerVo) {
-        //1.获取注册的数据
         String code = registerVo.getCode();
         String mobile = registerVo.getMobile();
         String nickname = registerVo.getNickname();
@@ -55,18 +54,18 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
 
         if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)
             || StringUtils.isEmpty(code) || StringUtils.isEmpty(nickname)){
-            throw new GuliException(20001,"必填项不能为空");
+            throw new GuliException(20001,"Can't be empty");
         }
         String rediscode = redisTemplate.opsForValue().get(mobile);
         if (!code.equals(rediscode)){
-            throw new GuliException(20001,"验证码错误");
+            throw new GuliException(20001,"Verify code failed");
         }
 
         QueryWrapper<UcenterMember> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("mobile",mobile);
         Integer count = baseMapper.selectCount(queryWrapper);
         if (count>0){
-            throw new GuliException(20001,"手机号已存在");
+            throw new GuliException(20001,"Phone number not exist");
         }
 
         UcenterMember ucenterMember=new UcenterMember();

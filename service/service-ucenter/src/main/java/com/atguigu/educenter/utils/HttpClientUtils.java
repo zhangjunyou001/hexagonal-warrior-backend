@@ -89,7 +89,6 @@ public class HttpClientUtils {
 				HttpEntity entity = new StringEntity(body, ContentType.create(mimeType, charset));
 				post.setEntity(entity);
 			}
-			// 设置参数
 			Builder customReqConf = RequestConfig.custom();
 			if (connTimeout != null) {
 				customReqConf.setConnectTimeout(connTimeout);
@@ -101,11 +100,9 @@ public class HttpClientUtils {
 
 			HttpResponse res;
 			if (url.startsWith("https")) {
-				// 执行 Https 请求.
 				client = createSSLInsecureClient();
 				res = client.execute(post);
 			} else {
-				// 执行 Http 请求.
 				client = HttpClientUtils.client;
 				res = client.execute(post);
 			}
@@ -141,7 +138,6 @@ public class HttpClientUtils {
 					post.addHeader(entry.getKey(), entry.getValue());
 				}
 			}
-			// 设置参数
 			Builder customReqConf = RequestConfig.custom();
 			if (connTimeout != null) {
 				customReqConf.setConnectTimeout(connTimeout);
@@ -152,11 +148,9 @@ public class HttpClientUtils {
 			post.setConfig(customReqConf.build());
 			HttpResponse res = null;
 			if (url.startsWith("https")) {
-				// 执行 Https 请求.
 				client = createSSLInsecureClient();
 				res = client.execute(post);
 			} else {
-				// 执行 Http 请求.
 				client = HttpClientUtils.client;
 				res = client.execute(post);
 			}
@@ -177,7 +171,6 @@ public class HttpClientUtils {
 		HttpGet get = new HttpGet(url);
 		String result = "";
 		try {
-			// 设置参数
 			Builder customReqConf = RequestConfig.custom();
 			if (connTimeout != null) {
 				customReqConf.setConnectTimeout(connTimeout);
@@ -190,11 +183,9 @@ public class HttpClientUtils {
 			HttpResponse res = null;
 
 			if (url.startsWith("https")) {
-				// 执行 Https 请求.
 				client = createSSLInsecureClient();
 				res = client.execute(get);
 			} else {
-				// 执行 Http 请求.
 				client = HttpClientUtils.client;
 				res = client.execute(get);
 			}

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({"com.atguigu"})
 @SpringBootApplication
 @MapperScan("com.atguigu.educenter.mapper")
-@EnableDiscoveryClient //服务注册 Nacos
+@EnableDiscoveryClient
 public class UcenterApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UcenterApplication.class, args);
