@@ -19,7 +19,7 @@ public class PayLogController {
     @GetMapping("createNative/{orderNo}")
     public R createNative(@PathVariable String orderNo){
         Map map=payLogService.createNative(orderNo);
-        System.out.println("****返回二维码map集合:"+map);
+        System.out.println("****Return QR Code:"+map);
         return R.ok().data(map);
     }
 
@@ -30,20 +30,20 @@ public class PayLogController {
 
         Map<String,String> map = payLogService.queryPayStatusSimulation(orderNo);
 
-        System.out.println("*****查询订单状态map集合:"+map);
+        System.out.println("*****Query Order status:"+map);
         if(map == null) {
-            return R.error().message("支付出错了");
+            return R.error().message("Pay failed");
         }
 
         if(map.get("trade_state").equals("SUCCESS")) {// pay success
 
-            System.out.println("#####支付成功");
+            System.out.println("##### Pay Success");
 
             // add history to order table, and update order status
             payLogService.updateOrdersStatus(map);
-            return R.ok().message("支付成功");
+            return R.ok().message("Pay Success");
         }
-        return R.ok().code(25000).message("支付中");
+        return R.ok().code(25000).message("Paying..");
 
     }
 }

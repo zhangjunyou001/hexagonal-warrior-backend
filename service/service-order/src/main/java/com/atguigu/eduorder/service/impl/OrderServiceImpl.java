@@ -41,8 +41,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setMemberId(memberId);
         order.setMobile(userInfoOrder.getMobile());
         order.setNickname(userInfoOrder.getNickname());
-        order.setStatus(0);  //订单状态（0：未支付 1：已支付）
-        order.setPayType(1);  //支付类型 ，微信1
+        order.setStatus(0);  //0: not payed, 1: payed
+        order.setPayType(1);
 
 
         order.setGmtCreate(new Date());

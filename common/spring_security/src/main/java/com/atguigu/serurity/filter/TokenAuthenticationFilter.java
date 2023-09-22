@@ -53,12 +53,11 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
             ResponseUtil.out(res, R.error());
         }
 
-        //TODO：问题代码
         chain.doFilter(req, res);
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        // token置于header里
+
         String token = request.getHeader("token");
         if (token != null && !"".equals(token.trim())) {
             String userName = tokenManager.getUserFromToken(token);
