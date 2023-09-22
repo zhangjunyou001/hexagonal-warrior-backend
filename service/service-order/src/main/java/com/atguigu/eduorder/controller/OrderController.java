@@ -3,8 +3,6 @@ package com.atguigu.eduorder.controller;
 
 import com.atguigu.commonutils.JwtUtils;
 import com.atguigu.commonutils.R;
-import com.atguigu.eduorder.client.EduClient;
-import com.atguigu.eduorder.client.UcenterClient;
 import com.atguigu.eduorder.entity.Order;
 import com.atguigu.eduorder.service.OrderService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -41,7 +39,7 @@ public class OrderController {
     @GetMapping("getOrderInfo/{orderNo}")
     public R getOrderInfo(@PathVariable String orderNo){
 
-        System.out.println("根据订单ID查询订单信息");
+        System.out.println("Query order info by order ID");
 
         QueryWrapper<Order> wrapper=new QueryWrapper<>();
         wrapper.eq("order_no",orderNo);
