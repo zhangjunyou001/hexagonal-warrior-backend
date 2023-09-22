@@ -79,20 +79,6 @@ public class HttpClientUtils {
 		return get(url, charset, connTimeout, readTimeout);
 	}
 
-	/**
-	 * 发送一个 Post 请求, 使用指定的字符集编码.
-	 *
-	 * @param url
-	 * @param body RequestBody
-	 * @param mimeType 例如 application/xml "application/x-www-form-urlencoded" a=1&b=2&c=3
-	 * @param charset 编码
-	 * @param connTimeout 建立链接超时时间,毫秒.
-	 * @param readTimeout 响应超时时间,毫秒.
-	 * @return ResponseBody, 使用指定的字符集编码.
-	 * @throws ConnectTimeoutException 建立链接超时异常
-	 * @throws SocketTimeoutException  响应超时
-	 * @throws Exception
-	 */
 	public static String post(String url, String body, String mimeType,String charset, Integer connTimeout, Integer readTimeout)
 			throws ConnectTimeoutException, SocketTimeoutException, Exception {
 		HttpClient client = null;
@@ -134,18 +120,6 @@ public class HttpClientUtils {
 	}
 
 
-	/**
-	 * 提交form表单
-	 *
-	 * @param url
-	 * @param params
-	 * @param connTimeout
-	 * @param readTimeout
-	 * @return
-	 * @throws ConnectTimeoutException
-	 * @throws SocketTimeoutException
-	 * @throws Exception
-	 */
 	public static String postForm(String url, Map<String, String> params, Map<String, String> headers, Integer connTimeout,Integer readTimeout) throws ConnectTimeoutException,
 			SocketTimeoutException, Exception {
 
@@ -196,21 +170,6 @@ public class HttpClientUtils {
 		}
 	}
 
-
-
-
-	/**
-	 * 发送一个 GET 请求
-	 *
-	 * @param url
-	 * @param charset
-	 * @param connTimeout  建立链接超时时间,毫秒.
-	 * @param readTimeout  响应超时时间,毫秒.
-	 * @return
-	 * @throws ConnectTimeoutException   建立链接超时
-	 * @throws SocketTimeoutException   响应超时
-	 * @throws Exception
-	 */
 	public static String get(String url, String charset, Integer connTimeout,Integer readTimeout)
 			throws ConnectTimeoutException,SocketTimeoutException, Exception {
 
@@ -250,13 +209,6 @@ public class HttpClientUtils {
 		return result;
 	}
 
-
-	/**
-	 * 从 response 里获取 charset
-	 *
-	 * @param ressponse
-	 * @return
-	 */
 	@SuppressWarnings("unused")
 	private static String getCharsetFromResponse(HttpResponse ressponse) {
 		// Content-Type:text/html; charset=GBK
@@ -269,13 +221,6 @@ public class HttpClientUtils {
 		return null;
 	}
 
-
-
-	/**
-	 * 创建 SSL连接
-	 * @return
-	 * @throws GeneralSecurityException
-	 */
 	private static CloseableHttpClient createSSLInsecureClient() throws GeneralSecurityException {
 		try {
 			SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
