@@ -23,10 +23,10 @@ public class getCode {
         gc.setAuthor("gengky");
         gc.setOpen(false);
         gc.setFileOverride(false);
-        gc.setServiceName("%sService");	//去掉Service接口的首字母I
-        gc.setIdType(IdType.ID_WORKER); //主键策略
-        gc.setDateType(DateType.ONLY_DATE);//定义生成的实体类中日期类型
-        gc.setSwagger2(true);//开启Swagger2模式
+        gc.setServiceName("%sService");
+        gc.setIdType(IdType.ID_WORKER);
+        gc.setDateType(DateType.ONLY_DATE);
+        gc.setSwagger2(true);
 
         mpg.setGlobalConfig(gc);
 

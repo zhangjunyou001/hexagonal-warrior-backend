@@ -7,14 +7,14 @@ import com.atguigu.staservice.mapper.StatisticsDailyMapper;
 import com.atguigu.staservice.service.StatisticsDailyService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
-import org.apache.commons.lang3.RandomUtils;
+import java.util.Map;
 
 @Service
 public class StatisticsDailyServiceImpl extends ServiceImpl<StatisticsDailyMapper, StatisticsDaily> implements StatisticsDailyService {
@@ -34,14 +34,13 @@ public class StatisticsDailyServiceImpl extends ServiceImpl<StatisticsDailyMappe
 
         countRegister=RandomUtils.nextInt(100,200);
 
-        //把获取数据添加数据库，统计分析表里面
         StatisticsDaily sta = new StatisticsDaily();
-        sta.setRegisterNum(countRegister); //注册人数
-        sta.setDateCalculated(day);//统计日期
+        sta.setRegisterNum(countRegister);
+        sta.setDateCalculated(day);
 
-        sta.setVideoViewNum(RandomUtils.nextInt(500,900));//视频观看人数
-        sta.setLoginNum(RandomUtils.nextInt(100,200));//登录人数
-        sta.setCourseNum(RandomUtils.nextInt(200,500));//课程数
+        sta.setVideoViewNum(RandomUtils.nextInt(500,900));
+        sta.setLoginNum(RandomUtils.nextInt(100,200));
+        sta.setCourseNum(RandomUtils.nextInt(200,500));
         baseMapper.insert(sta);
     }
 
