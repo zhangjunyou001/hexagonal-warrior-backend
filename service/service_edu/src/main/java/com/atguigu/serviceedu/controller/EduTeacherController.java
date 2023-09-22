@@ -50,7 +50,7 @@ public class EduTeacherController {
     }
 
 
-    @PostMapping("PageCondition/{current}/{limit}")
+    @PostMapping("pageCondition/{current}/{limit}")
     public R pageTeacherCondition(@PathVariable long current, @PathVariable long limit,
                                   @RequestBody(required = false) TeacherQuery teacherQuery){
         Page<EduTeacher> pageTeacher=new Page<>(current,limit);
