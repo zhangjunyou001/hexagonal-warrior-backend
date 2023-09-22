@@ -7,14 +7,12 @@ import com.atguigu.commonutils.ordervo.UcenterMemberOrder;
 import com.atguigu.educenter.entity.UcenterMember;
 import com.atguigu.educenter.entity.vo.RegisterVo;
 import com.atguigu.educenter.service.UcenterMemberService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Api(description = "登录注册")
 @RestController
 @RequestMapping("/educenter/member")
 //@CrossOrigin
@@ -26,7 +24,7 @@ public class UcenterMemberController {
     @PostMapping("login")
     public R longUser(@RequestBody UcenterMember ucenterMember){
         String token=memberService.login(ucenterMember);
-        System.out.println("============生成一个token==========");
+        System.out.println("============generate a token==========");
         System.out.println(token);
         return R.ok().data("token",token);
     }
