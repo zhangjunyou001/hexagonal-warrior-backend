@@ -22,7 +22,6 @@ public class StatisticsDailyController {
         return R.ok();
     }
 
-
     @GetMapping("showData/{type}/{begin}/{end}")
     public R showData(@PathVariable String type,@PathVariable String begin,
                       @PathVariable String end){
