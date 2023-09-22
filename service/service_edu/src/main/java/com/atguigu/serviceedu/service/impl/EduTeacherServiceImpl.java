@@ -30,7 +30,6 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
     public Map<String, Object> getTeacherFrontList(Page<EduTeacher> pageTeacher) {
         QueryWrapper<EduTeacher> wrapper=new QueryWrapper<>();
         wrapper.orderByDesc("id");
-        //把分页数据封装到 pageTeacher对象
         baseMapper.selectPage(pageTeacher,wrapper);
 
         List<EduTeacher> records = pageTeacher.getRecords();
@@ -41,7 +40,6 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         boolean hasNext = pageTeacher.hasNext();
         boolean hasPrevious = pageTeacher.hasPrevious();
 
-        //把分页数据获取出来，放到map集合
         Map<String,Object> map=new HashMap<>();
         map.put("items",records);
         map.put("current",current);

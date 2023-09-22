@@ -14,29 +14,22 @@ public class getCode {
     @Test
     public void main1() {
 
-        // 1、创建代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
-        // 2、全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         System.out.println(projectPath);
         gc.setOutputDir("F:\\IsMyProgect\\MyGuliClass\\service\\service_edu" + "/src/main/java");
         gc.setAuthor("gengky");
-        gc.setOpen(false); //生成后是否打开资源管理器
-        gc.setFileOverride(false); //重新生成时文件是否覆盖
-        /*
-         * mp生成service层代码，默认接口名称第一个字母有 I
-         * UcenterService
-         * */
-        gc.setServiceName("%sService");	//去掉Service接口的首字母I
-        gc.setIdType(IdType.ID_WORKER); //主键策略
-        gc.setDateType(DateType.ONLY_DATE);//定义生成的实体类中日期类型
-        gc.setSwagger2(true);//开启Swagger2模式
+        gc.setOpen(false);
+        gc.setFileOverride(false);
+        gc.setServiceName("%sService");
+        gc.setIdType(IdType.ID_WORKER);
+        gc.setDateType(DateType.ONLY_DATE);
+        gc.setSwagger2(true);
 
         mpg.setGlobalConfig(gc);
 
-        // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setUrl("jdbc:mysql://localhost:3306/myguliclass?serverTimezone=GMT%2B8");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
@@ -45,9 +38,8 @@ public class getCode {
         dsc.setDbType(DbType.MYSQL);
         mpg.setDataSource(dsc);
 
-        // 4、包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName("serviceedu"); //模块名
+        pc.setModuleName("serviceedu");
         pc.setParent("com.atguigu");
         pc.setController("controller");
         pc.setEntity("entity");
@@ -55,21 +47,19 @@ public class getCode {
         pc.setMapper("mapper");
         mpg.setPackageInfo(pc);
 
-        // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setInclude("edu_course","edu_course_description","edu_chapter","edu_video");
-        strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
-        strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
+        strategy.setNaming(NamingStrategy.underline_to_camel);
+        strategy.setTablePrefix(pc.getModuleName() + "_");
 
-        strategy.setColumnNaming(NamingStrategy.underline_to_camel);//数据库表字段映射到实体的命名策略
-        strategy.setEntityLombokModel(true); // lombok 模型 @Accessors(chain = true) setter链式操作
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        strategy.setEntityLombokModel(true);
 
-        strategy.setRestControllerStyle(true); //restful api风格控制器
-        strategy.setControllerMappingHyphenStyle(true); //url中驼峰转连字符
+        strategy.setRestControllerStyle(true);
+        strategy.setControllerMappingHyphenStyle(true);
 
         mpg.setStrategy(strategy);
 
-        // 6、执行
         mpg.execute();
     }
 }
