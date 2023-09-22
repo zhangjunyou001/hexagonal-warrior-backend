@@ -24,9 +24,6 @@ public class IndexController {
     @Autowired
     private IndexService indexService;
 
-    /**
-     * 根据token获取用户信息
-     */
     @GetMapping("info")
     public R info(){
         //获取当前登录用户用户名
@@ -35,10 +32,6 @@ public class IndexController {
         return R.ok().data(userInfo);
     }
 
-    /**
-     * Get Menu
-     * @return
-     */
     @GetMapping("menu")
     public R getMenu(){
         //获取当前登录用户用户名

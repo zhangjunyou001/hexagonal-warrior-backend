@@ -10,7 +10,7 @@ import java.util.List;
 public class MemuHelper {
 
     /**
-     * 构建菜单
+     * Build menu
      * @param treeNodes
      * @return
      */
@@ -18,7 +18,7 @@ public class MemuHelper {
         List<JSONObject> meuns = new ArrayList<>();
         if(treeNodes.size() == 1) {
             Permission topNode = treeNodes.get(0);
-            //左侧一级菜单
+            // First level menu on left
             List<Permission> oneMeunList = topNode.getChildren();
             for(Permission one :oneMeunList) {
                 JSONObject oneMeun = new JSONObject();
