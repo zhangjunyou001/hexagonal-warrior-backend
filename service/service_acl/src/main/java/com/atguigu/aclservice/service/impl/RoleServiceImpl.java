@@ -21,21 +21,16 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     private UserRoleService userRoleService;
 
 
-    //根据用户获取角色数据
     @Override
     public Map<String, Object> findRoleByUserId(String userId) {
-        //查询所有的角色
         List<Role> allRolesList =baseMapper.selectList(null);
 
-        //根据用户id，查询用户拥有的角色id
         List<UserRole> existUserRoleList = userRoleService.list(new QueryWrapper<UserRole>().eq("user_id", userId).select("role_id"));
 
         List<String> existRoleList = existUserRoleList.stream().map(c->c.getRoleId()).collect(Collectors.toList());
 
-        //对角色进行分类
         List<Role> assignRoles = new ArrayList<Role>();
         for (Role role : allRolesList) {
-            //已分配
             if(existRoleList.contains(role.getId())) {
                 assignRoles.add(role);
             }
@@ -47,7 +42,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         return roleMap;
     }
 
-    //根据用户分配角色
     @Override
     public void saveUserRoleRealtionShip(String userId, String[] roleIds) {
         userRoleService.remove(new QueryWrapper<UserRole>().eq("user_id", userId));
@@ -70,7 +64,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @Override
     public List<Role> selectRoleByUserId(String id) {
-        //根据用户id拥有的角色id
         List<UserRole> userRoleList = userRoleService.list(new QueryWrapper<UserRole>().eq("user_id", id).select("role_id"));
         List<String> roleIdList = userRoleList.stream().map(item -> item.getRoleId()).collect(Collectors.toList());
         List<Role> roleList = new ArrayList<>();

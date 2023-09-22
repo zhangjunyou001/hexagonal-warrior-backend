@@ -24,22 +24,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private PermissionService permissionService;
 
-    /***
-     * 根据账号获取用户信息
-     * @param username:
-     * @return: org.springframework.security.core.userdetails.UserDetails
-     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // 从数据库中取出用户信息
         User user = userService.selectByUsername(username);
 
-        // 判断用户是否存在
         if (null == user){
-            throw new GuliException(20001,"用户名或密码错误");
-            //throw new UsernameNotFoundException("用户名不存在！");
+            throw new GuliException(20001,"Username or password is wrong");
         }
-        // 返回UserDetails实现类
         com.atguigu.serurity.entity.User curUser = new com.atguigu.serurity.entity.User();
         BeanUtils.copyProperties(user,curUser);
 
