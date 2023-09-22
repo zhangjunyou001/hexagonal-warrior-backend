@@ -1,16 +1,15 @@
 package com.atguigu.aclservice.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.atguigu.aclservice.entity.Permission;
 import com.atguigu.aclservice.service.IndexService;
-import com.atguigu.aclservice.service.PermissionService;
 import com.atguigu.commonutils.R;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,6 @@ public class IndexController {
 
     @GetMapping("info")
     public R info(){
-        //获取当前登录用户用户名
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Map<String, Object> userInfo = indexService.getUserInfo(username);
         return R.ok().data(userInfo);
@@ -34,7 +32,6 @@ public class IndexController {
 
     @GetMapping("menu")
     public R getMenu(){
-        //获取当前登录用户用户名
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         List<JSONObject> permissionList = indexService.getMenu(username);
         return R.ok().data("permissionList", permissionList);
