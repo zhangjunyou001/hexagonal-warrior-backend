@@ -7,7 +7,6 @@ import com.atguigu.serviceedu.entity.EduSubject;
 import com.atguigu.serviceedu.entity.excel.SubjectData;
 import com.atguigu.serviceedu.service.EduSubjectService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.stereotype.Service;
 
 public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
 
@@ -20,22 +19,19 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
     @Override
     public void invoke(SubjectData subjectData, AnalysisContext analysisContext) {
         if(subjectData == null) {
-            throw new GuliException(20001,"文件数据为空");
+            throw new GuliException(20001,"File is empty");
         }
 
         EduSubject existOneSubject = this.existOneSubject(subjectService, subjectData.getOneSubjectName());
-        if(existOneSubject == null) { //没有相同一级分类，进行添加
+        if(existOneSubject == null) {
             existOneSubject = new EduSubject();
             existOneSubject.setParentId("0");
             existOneSubject.setTitle(subjectData.getOneSubjectName());//一级分类名称
             subjectService.save(existOneSubject);
         }
 
-        //获取一级分类id值
         String pid = existOneSubject.getId();
 
-        //添加二级分类
-        //判断二级分类是否重复
         EduSubject existTwoSubject = this.existTwoSubject(subjectService, subjectData.getTwoSubjectName(), pid);
         if(existTwoSubject == null) {
             existTwoSubject = new EduSubject();
