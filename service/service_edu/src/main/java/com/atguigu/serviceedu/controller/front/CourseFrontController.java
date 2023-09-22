@@ -34,11 +34,13 @@ public class CourseFrontController {
     @Autowired
     private OrdersClient ordersClient;
 
-    @PostMapping("getFrontCourseList/{page}/{limit}")
+    @GetMapping("getFrontCourseList/{page}/{limit}")
     public R getFrontCourseList(@PathVariable long page,
                                 @PathVariable long limit,
                                 @RequestBody(required = false)CourseFrontVo courseFrontVo){
-
+        if (courseFrontVo == null) {
+            courseFrontVo = new CourseFrontVo();
+        }
         Page<EduCourse> eduCoursePage=new Page<>(page,limit);
         Map<String,Object> map=eduCourseService.getCourseFrontList(eduCoursePage,courseFrontVo);
         return R.ok().data(map);
