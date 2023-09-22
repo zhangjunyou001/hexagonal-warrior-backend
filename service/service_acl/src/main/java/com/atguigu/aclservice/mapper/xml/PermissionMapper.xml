@@ -16,7 +16,6 @@
         <result property="gmtModified" column="gmt_modified"/>
     </resultMap>
 
-    <!-- 用于select查询公用抽取的列 -->
     <sql id="columns">
         p.id,p.pid,p.name,p.type,p.permission_value,path,p.component,p.icon,p.status,p.is_deleted,p.gmt_create,p.gmt_modified
     </sql>
