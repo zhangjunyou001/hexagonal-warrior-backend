@@ -36,11 +36,6 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.redisTemplate = redisTemplate;
     }
 
-    /**
-     * request configs
-     * @param http
-     * @throws Exception
-     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.exceptionHandling()
@@ -54,21 +49,11 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new TokenAuthenticationFilter(authenticationManager(), tokenManager, redisTemplate)).httpBasic();
     }
 
-    /**
-     * Password process
-     * @param auth
-     * @throws Exception
-     */
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(defaultPasswordEncoder);
     }
 
-    /**
-     * Config unfiltered requests
-     * @param web /admin/acl/index
-     * @throws Exception
-     */
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/api/**","**/api/**","admin/**","**/acl/**",
