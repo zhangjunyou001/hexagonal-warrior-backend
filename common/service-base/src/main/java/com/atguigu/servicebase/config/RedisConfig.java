@@ -19,15 +19,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 
-@EnableCaching //开启Redis缓存
-@Configuration //申明是配置类
+@EnableCaching
+@Configuration
 public class RedisConfig extends CachingConfigurerSupport {
 
-    /**
-     * RedisTemplate 模板类
-     * @param factory
-     * @return
-     */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
@@ -38,32 +33,26 @@ public class RedisConfig extends CachingConfigurerSupport {
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
         template.setConnectionFactory(factory);
-        //key序列化方式
+
         template.setKeySerializer(redisSerializer);
-        //value序列化
+
         template.setValueSerializer(jackson2JsonRedisSerializer);
-        //value hashmap序列化
+
         template.setHashValueSerializer(jackson2JsonRedisSerializer);
         return template;
     }
 
-    /**
-     * 缓存管理
-     * @param factory
-     * @return
-     */
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory factory) {
         RedisSerializer<String> redisSerializer = new StringRedisSerializer();
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-        //解决查询缓存转换异常的问题
+
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
-        // 配置序列化（解决乱码的问题）,过期时间600秒
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofSeconds(600)) //缓存过期时间：600s
+                .entryTtl(Duration.ofSeconds(600))
               .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
                 .disableCachingNullValues();

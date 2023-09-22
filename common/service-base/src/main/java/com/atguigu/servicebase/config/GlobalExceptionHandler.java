@@ -9,18 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 
-/**
- * 统一异常处理类
- */
+
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
-	/**
-	 * 自定义异常
-	 * @param e
-	 * @return
-	 */
 	@ExceptionHandler(GuliException.class)
 	@ResponseBody
 	public R error(GuliException e){
@@ -29,16 +22,11 @@ public class GlobalExceptionHandler {
 		return R.error().message(e.getMsg()).code(e.getCode());
 	}
 
-	/**
-	 * 全局异常
-	 * @param e
-	 * @return
-	 */
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
 	public R error(Exception e){
 		e.printStackTrace();
-		return R.error().message("执行了全局异常处理...");
+		return R.error().message("Global exception handling performed...");
 	}
 
 
@@ -46,13 +34,13 @@ public class GlobalExceptionHandler {
 	@ResponseBody
 	public R error(IOException e){
 		e.printStackTrace();
-		return R.error().message("执行了IO异常处理...");
+		return R.error().message("IOException handling performed...");
 	}
 
 	@ExceptionHandler(ArithmeticException.class)
 	@ResponseBody
 	public R error(ArithmeticException e){
 		e.printStackTrace();
-		return R.error().message("执行了ArithmeticException异常处理...");
+		return R.error().message("ArithmeticException handling performed...");
 	}
 }

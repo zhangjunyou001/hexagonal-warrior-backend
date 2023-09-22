@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 public class GuliException extends RuntimeException {
 
-    @ApiModelProperty(value = "状态码")
     private Integer code;
-    //异常信息
     private String msg;
 
 }
