@@ -11,16 +11,14 @@ import com.atguigu.serviceedu.entity.frontvo.CourseWebVo;
 import com.atguigu.serviceedu.service.EduChapterService;
 import com.atguigu.serviceedu.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
-@Api(description = "课程前台")
 @RestController
 @RequestMapping("/eduservice/coursefront")
 //@CrossOrigin
@@ -48,13 +46,10 @@ public class CourseFrontController {
 
     @GetMapping("getFrontCourseInfo/{courseId}")
     public R getFrontCourseInfo(@PathVariable String courseId, HttpServletRequest request) {
-        //根据课程id，编写sql语句查询课程信息
         CourseWebVo courseWebVo = eduCourseService.getBaseCourseInfo(courseId);
 
-        //根据课程id查询章节和小节
         List<ChapterVo> chapterVideoList = eduChapterService.getChapterVideoByCourseId(courseId);
 
-        //根据课程ID 和用户ID 查询课程是否已经支付
         String uid = JwtUtils.getMemberIdByJwtToken(request);
         boolean byCourse = ordersClient.isByCourse(courseId, uid);
 

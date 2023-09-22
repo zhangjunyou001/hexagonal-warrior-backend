@@ -5,13 +5,11 @@ import com.atguigu.commonutils.R;
 import com.atguigu.serviceedu.entity.EduChapter;
 import com.atguigu.serviceedu.entity.chapter.ChapterVo;
 import com.atguigu.serviceedu.service.EduChapterService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(description="章节管理")
 @RestController
 @RequestMapping("/eduservice/chapter")
 //@CrossOrigin
