@@ -1,7 +1,7 @@
 package com.atguigu.commonutils;
 
 /**
- * 定义返回结果的代码
+ * Define return code
  */
 public interface ResultCode {
     public static Integer SUCCESS = 20000;

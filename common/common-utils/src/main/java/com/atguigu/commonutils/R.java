@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 同一结果返回的类
+ * Define return results
  */
 @Data
 public class R {
@@ -34,7 +34,7 @@ public class R {
     }
 
     /**
-     * 成功的静态方法
+     * Result for error
      * @return
      */
     public static R error(){
@@ -46,7 +46,7 @@ public class R {
     }
 
     /**
-     * 失败的静态方法
+     * Result for success
      * @param success
      * @return
      */
@@ -75,7 +75,4 @@ public class R {
         return this;
     }
 
-    /*
-     * 返回是 this，能够实现 链式编程 的效果，R.ok().data("items",list);
-     */
 }
